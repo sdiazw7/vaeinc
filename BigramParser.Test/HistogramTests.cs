@@ -23,8 +23,8 @@ namespace BigramParser.Test
         [Test]
         public void SplitString_InputWithComma_SplitsWordsByComma()
         {
-            List<string> expected = new List<string> { "the", "quick" };
-            List<string> actual = histogram.SplitString("the,quick");
+            IEnumerable<string> expected = new List<string> { "the", "quick" };
+            IEnumerable<string> actual = histogram.SplitString("the,quick");
 
             Assert.AreEqual(expected, actual);
         }
@@ -32,8 +32,8 @@ namespace BigramParser.Test
         [Test]
         public void SplitString_InputWithUppercase_IgnoresUppercase()
         {
-            List<string> expected = new List<string> { "the", "quick", "brown", "fox" };
-            List<string> actual = histogram.SplitString("The Quick brown Fox");
+            IEnumerable<string> expected = new List<string> { "the", "quick", "brown", "fox" };
+            IEnumerable<string> actual = histogram.SplitString("The Quick brown Fox");
 
             Assert.AreEqual(expected, actual);
         }
@@ -41,8 +41,8 @@ namespace BigramParser.Test
         [Test]
         public void SplitString_InputWithPeriod_IgnoresPeriod()
         {
-            List<string> expected = new List<string> { "the", "quick", "brown", "fox" };
-            List<string> actual = histogram.SplitString("The quick brown fox.");
+            IEnumerable<string> expected = new List<string> { "the", "quick", "brown", "fox" };
+            IEnumerable<string> actual = histogram.SplitString("The quick brown fox.");
 
             Assert.AreEqual(expected, actual);
         }
@@ -50,8 +50,8 @@ namespace BigramParser.Test
         [Test]
         public void SplitString_InputWithExtraSpace_IgnoresExtraSpace()
         {
-            List<string> expected = new List<string> { "the", "quick", "brown", "fox" };
-            List<string> actual = histogram.SplitString("The  quick brown  fox.");
+            IEnumerable<string> expected = new List<string> { "the", "quick", "brown", "fox" };
+            IEnumerable<string> actual = histogram.SplitString("The  quick brown  fox.");
 
             Assert.AreEqual(expected, actual);
         }
@@ -59,8 +59,8 @@ namespace BigramParser.Test
         [Test]
         public void SplitString_InputOneWord_ReturnsOneCollectionItem()
         {
-            List<string> expected = new List<string> { "fox" };
-            List<string> actual = histogram.SplitString("fox");
+            IEnumerable<string> expected = new List<string> { "fox" };
+            IEnumerable<string> actual = histogram.SplitString("fox");
 
             Assert.AreEqual(expected, actual);
         }
@@ -70,7 +70,7 @@ namespace BigramParser.Test
         {
             IEnumerable<WordPair> expected = new WordPair[] { new WordPair() { Text = "quick quick", Count = 1 } };
 
-            List<string> words = new List<string> { "quick", "quick" };
+            IEnumerable<string> words = new List<string> { "quick", "quick" };
             IEnumerable<WordPair> actual = histogram.GetWordPairGroups(words);
 
             // Could not compare the two lists directly using Assert.AreEqual. 
@@ -83,7 +83,7 @@ namespace BigramParser.Test
         {
             IEnumerable<WordPair> expected = new WordPair[] { new WordPair() { Text = "quick quick", Count = 2 } };
 
-            List<string> words = new List<string> { "quick", "quick", "quick" };
+            IEnumerable<string> words = new List<string> { "quick", "quick", "quick" };
             IEnumerable<WordPair> actual = histogram.GetWordPairGroups(words);
 
             Assert.That(expected.Select(wpSelector), Is.EquivalentTo(actual.Select(wpSelector)));
@@ -94,7 +94,7 @@ namespace BigramParser.Test
         {
             IEnumerable<WordPair> expected = new WordPair[] { new WordPair() { Text = "quick brown", Count = 1 } };
 
-            List<string> words = new List<string> { "quick", "brown" };
+            IEnumerable<string> words = new List<string> { "quick", "brown" };
             IEnumerable<WordPair> actual = histogram.GetWordPairGroups(words);
 
             Assert.That(expected.Select(wpSelector), Is.EquivalentTo(actual.Select(wpSelector)));
@@ -108,7 +108,7 @@ namespace BigramParser.Test
                 new WordPair() { Text = "brown fox", Count = 1 }
             };
 
-            List<string> words = new List<string> { "quick", "brown", "fox" };
+            IEnumerable<string> words = new List<string> { "quick", "brown", "fox" };
             IEnumerable<WordPair> actual = histogram.GetWordPairGroups(words);
 
             Assert.That(expected.Select(wpSelector), Is.EquivalentTo(actual.Select(wpSelector)));
@@ -127,7 +127,7 @@ namespace BigramParser.Test
                 new WordPair() { Text = "blue hare", Count = 1 }
             };
 
-            List<string> words = new List<string> { "the", "quick", "brown", "fox", "and", "the", "quick", "blue", "hare" };
+            IEnumerable<string> words = new List<string> { "the", "quick", "brown", "fox", "and", "the", "quick", "blue", "hare" };
             IEnumerable<WordPair> actual = histogram.GetWordPairGroups(words);
 
             Assert.That(expected.Select(wpSelector), Is.EquivalentTo(actual.Select(wpSelector)));

@@ -24,7 +24,7 @@ namespace BigramParser
 
             try
             {
-                List<string> words = SplitString(input);
+                IEnumerable<string> words = SplitString(input);
                 wordPairGroups = GetWordPairGroups(words);
             }
             catch (Exception e)
@@ -35,18 +35,18 @@ namespace BigramParser
             return wordPairGroups;
         }
 
-        public List<string> SplitString(String input)
+        public IEnumerable<string> SplitString(String input)
         {
-            return Regex.Split(input.ToLower(), @"\W+").Where(s => s != String.Empty).ToList();
+            return Regex.Split(input.ToLower(), @"\W+").Where(s => s != String.Empty);
         }
 
-        public IEnumerable<WordPair> GetWordPairGroups(List<string> words)
+        public IEnumerable<WordPair> GetWordPairGroups(IEnumerable<string> words)
         {
             IOrderedEnumerable<WordPair> wordPairGroups = null;
 
             // Pair up adjacent words and add to a collection
             IEnumerable<string> wordPairs = words.Take(words.Count() - 1)
-                .Select((w, i) => w + " " + words[i + 1]);
+                .Select((w, i) => w + " " + words.ElementAt(i + 1));
 
             // Group by adjacent word pairs
             wordPairGroups = wordPairs.GroupBy(x => x)
