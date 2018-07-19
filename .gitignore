@@ -3,3 +3,11 @@
 ################################################################################
 
 /Bigram/bin/Debug
+/BigramParser.Test/bin/Debug
+/BigramParser.Test/obj/Debug
+/Bigram/obj/Debug
+/VAE.CLI.Flags/bin/Debug
+/VAE.CLI.Flags/obj/Debug
+/VAE.CLI.Flags.Test/bin/Debug
+/VAE.CLI.Flags.Test/obj/Debug
+/Bigram/BigramParser.csproj.user
