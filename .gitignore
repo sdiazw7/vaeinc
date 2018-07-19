@@ -11,3 +11,6 @@
 /VAE.CLI.Flags.Test/bin/Debug
 /VAE.CLI.Flags.Test/obj/Debug
 /Bigram/BigramParser.csproj.user
+/BigramParser/bin/Debug
+/BigramParser/obj/Debug
+/.vs/VAE.CLI/v14
